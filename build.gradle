@@ -73,6 +73,8 @@ minecraft {
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 "${mod_id}" {
@@ -147,6 +149,9 @@ dependencies {
 
     implementation fg.deobf("curse.maven:mekanism-268560:${mekanism_file_id}")
     implementation fg.deobf("curse.maven:applied-energistics-2-223794:${ae2_file_id}")
+    implementation fg.deobf("curse.maven:guideme-1173950:${guideme_file_id}")
+    implementation fg.deobf("curse.maven:applied-mekanistics-574300:${applied_mekanistics_file_id}")
+    implementation fg.deobf("curse.maven:applied-mekanistics-574300:${applied_mekanistics_file_id}")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
