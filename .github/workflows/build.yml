@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - master
+    tags:
+      - 'v*'
   pull_request:
   workflow_dispatch:
 
@@ -41,3 +43,23 @@ jobs:
           name: creativity-drive-jars
           path: build/libs/*.jar
           if-no-files-found: error
+
+  release:
+    name: Attach jars to release
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: creativity-drive-jars
+          path: release-artifacts
+
+      - name: Upload jars to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-artifacts/*.jar
